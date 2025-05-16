@@ -1,0 +1,192 @@
+/* General */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffe6f0; /* fondo rosa claro */
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Contenedores principales */
+.container {
+  max-width: 800px;
+  margin: auto;
+  background-color: #fff0f5;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.8rem 1.5rem rgba(214, 51, 108, 0.15);
+}
+
+/* Títulos */
+h1,
+h2,
+h4,
+h5 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #c2185b; /* rosa fuerte */
+}
+
+h2.text-primary,
+h2.text-success,
+h2.text-danger {
+  font-weight: 800;
+  color: #d81b60;
+}
+
+/* Formularios */
+label.form-label {
+  font-weight: 600;
+  color: #a03e63;
+}
+
+input.form-control,
+select.form-select {
+  border-radius: 0.5rem;
+  border: 2px solid #f8bbd0;
+  padding: 0.5rem 0.75rem;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input.form-control:focus,
+select.form-select:focus {
+  border-color: #ec407a;
+  box-shadow: 0 0 8px rgba(236, 64, 122, 0.3);
+  outline: none;
+}
+
+/* Botones */
+.btn-primary,
+.btn-success {
+  font-weight: 700;
+  padding: 0.6rem 1.5rem;
+  border-radius: 2rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #ab47bc;
+  border-color: #ab47bc;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #ab47bc;
+  border-color: #ab47bc;
+}
+
+.btn-success {
+  background-color: #ab47bc;
+  border-color: #ab47bc;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background-color: #ba68c8;
+  border-color: #ba68c8;
+}
+
+/* Alertas */
+.alert-info {
+  background-color: #fce4ec;
+  color: #ad1457;
+  border-radius: 0.6rem;
+  padding: 0.9rem 1.2rem;
+  font-weight: 600;
+  box-shadow: 0 0 8px rgba(236, 64, 122, 0.15);
+}
+
+/* Badges de resultado */
+.badge {
+  transition: background-color 0.4s ease;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.5em 1.2em;
+  border-radius: 1.5rem;
+}
+
+.badge.bg-danger {
+  background-color: #d81b60 !important;
+  color: #fff !important;
+}
+
+.badge.bg-success {
+  background-color: #43a047 !important;
+  color: #fff !important;
+}
+
+/* Tabla */
+.table {
+  font-size: 0.95rem;
+}
+
+.table thead {
+  background-color: #fce4ec;
+  color: #c2185b;
+}
+
+.table tbody tr td:nth-child(2) {
+  font-weight: 600;
+  text-align: center;
+}
+
+.table tbody tr td.positivo {
+  color: #d81b60;
+}
+
+.table tbody tr td.negativo {
+  color: #388e3c;
+}
+
+/* Imagen matriz de confusión */
+.img-fluid {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  border-radius: 0.6rem;
+  border: 1px solid #f8bbd0;
+  margin-bottom: 1.5rem;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Listas */
+ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+ul li {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #6a1b9a;
+}
+
+/* Texto pequeño gris */
+.text-muted {
+  font-size: 0.9rem;
+  color: #7b1fa2;
+  white-space: pre-line;
+}
+
+/* Iconos */
+.bi {
+  color: #e91e63;
+  margin-right: 0.3rem;
+  vertical-align: -0.1em;
+}
+
+label.form-label i.bi {
+  margin-right: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Predicción Individual</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #ffe6f0;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 5rem auto;
+        background-color: #fff0f5;
+        padding: 2rem 2.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 0.8rem 1.5rem rgba(214, 51, 108, 0.15);
+      }
+
+      h2 {
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #d81b60;
+        text-align: center;
+        font-size: 40px;
+      }
+
+      label.form-label {
+        font-weight: 600;
+        color: #a03e63;
+      }
+
+      input.form-control,
+      select.form-select {
+        border-radius: 0.5rem;
+        border: 2px solid #f8bbd0;
+        padding: 0.5rem 0.75rem;
+        background-color: #fff;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      input.form-control:focus,
+      select.form-select:focus {
+        border-color: #ec407a;
+        box-shadow: 0 0 8px rgba(236, 64, 122, 0.3);
+        outline: none;
+      }
+
+      .btn-primary {
+        background-color: #ab47bc;
+        border: 2px solid #ab47bc;
+        color: #fff;
+        font-weight: 700;
+        padding: 0.6rem 1.5rem;
+        border-radius: 2rem;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background-color: #f06292;
+        border-color: #f06292;
+      }
+
+      i.bi {
+        color: #e91e63;
+        margin-right: 0.4rem;
+        vertical-align: -0.1em;
+      }
+
+      .alert-info {
+        background-color: #fce4ec;
+        color: #ad1457;
+        border-radius: 0.6rem;
+        padding: 0.9rem 1.2rem;
+        font-weight: 600;
+        box-shadow: 0 0 8px rgba(236, 64, 122, 0.15);
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .text-center {
+        text-align: center;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>
+        <i class="bi bi-heart-pulse-fill"></i> Predicción de Riesgo Fetal
+        (Individual)
+      </h2>
+
+      {% if resultado %}
+      <div class="alert alert-info">{{ resultado }}</div>
+      {% endif %}
+
+      <form action="/predecir" method="post">
+        {% set campos = [ ('C1', 'Edad de la madre (años)', 15, 50, 30,
+        'bi-calendar-week'), ('C2', 'Índice de Masa Corporal (BMI)', 15, 50, 25,
+        'bi-person'), ('C3', 'Edad gestacional del parto (semanas)', 20, 42, 37,
+        'bi-calendar-check'), ('C4', 'Gravidez (número de embarazos)', 1, 10, 2,
+        'bi-person-plus'), ('C5', 'Paridad (número de partos)', 0, 10, 1,
+        'bi-person-lines-fill'), ('C6', 'Síntoma inicial (0=Edema,
+        1=Hipertensión, 2=FGR)', 0, 2, 1, 'bi-exclamation-diamond'), ('C7',
+        'Edad gestacional al inicio del síntoma (semanas)', 20, 42, 30,
+        'bi-alarm'), ('C8', 'Intervalo IOS a parto (días)', 0, 100, 15,
+        'bi-hourglass'), ('C9', 'Edad gestacional de hipertensión (semanas)',
+        20, 42, 32, 'bi-activity'), ('C10', 'Intervalo hipertensión a parto
+        (días)', 0, 100, 10, 'bi-stopwatch'), ('C11', 'Edad gestacional de edema
+        (semanas)', 20, 42, 32, 'bi-droplet'), ('C12', 'Intervalo edema a parto
+        (días)', 0, 100, 10, 'bi-stopwatch-fill'), ('C13', 'Edad gestacional de
+        proteinuria (semanas)', 20, 42, 33, 'bi-droplet-half'), ('C14',
+        'Intervalo proteinuria a parto (días)', 0, 100, 10, 'bi-clock-history'),
+        ('C15', 'Tratamiento expectante (0=No, 1=Sí)', 0, 1, 0, 'bi-capsule'),
+        ('C16', 'Antihipertensivo antes de hospitalización (0=No, 1=Sí)', 0, 1,
+        0, 'bi-hospital'), ('C17', 'Antecedentes (0=No, 1=Hipertensión, 2=SOP)',
+        0, 2, 0, 'bi-journal-medical'), ('C18', 'Presión sistólica máxima
+        (mmHg)', 80, 200, 130, 'bi-activity'), ('C19', 'Presión diastólica
+        máxima (mmHg)', 40, 140, 90, 'bi-heart-pulse'), ('C20', 'Motivo del
+        parto (0=HELLP, 1=Sufrimiento fetal, 2=Disf. órganos, 3=Hipertensión,
+        4=Edema, 5=FGR)', 0, 5, 1, 'bi-signpost-2'), ('C21', 'Modo de parto
+        (0=Cesárea, 1=Vaginal)', 0, 1, 0, 'bi-truck'), ('C22', 'BNP máximo', 0,
+        3000, 200, 'bi-thermometer-half'), ('C23', 'Creatinina máxima (mg/dL)',
+        0.1, 5.0, 1.2, 'bi-droplet'), ('C24', 'Ácido úrico máximo (mg/dL)', 1,
+        15, 6, 'bi-droplet-fill'), ('C25', 'Proteinuria máxima (g/dL)', 0.1,
+        10.0, 2.5, 'bi-cloud-drizzle'), ('C26', 'Proteína total máxima (g/dL)',
+        3, 10, 6.5, 'bi-pie-chart'), ('C27', 'Albúmina máxima (g/dL)', 2, 6, 4,
+        'bi-bar-chart'), ('C28', 'ALT máxima (U/L)', 0, 500, 45,
+        'bi-speedometer'), ('C29', 'AST máxima (U/L)', 0, 500, 45,
+        'bi-speedometer2'), ('C30', 'Plaquetas máximas (mil/mm³)', 50, 600, 250,
+        'bi-droplet-half') ] %} {% for var, label, min, max, default, icon in
+        campos %}
+        <div class="mb-3">
+          <label for="{{ var }}" class="form-label">
+            <i class="bi {{ icon }}"></i> {{ var }} - {{ label }}
+          </label>
+          <input
+            id="{{ var }}"
+            class="form-control"
+            type="number"
+            name="{{ var }}"
+            step="any"
+            min="{{ min }}"
+            max="{{ max }}"
+            value="{{ default }}"
+            required
+          />
+        </div>
+        {% endfor %}
+
+        <div class="mb-4">
+          <label for="modelo" class="form-label">
+            <i class="bi bi-cpu-fill"></i> Modelo de predicción
+          </label>
+          <select id="modelo" class="form-select" name="modelo" required>
+            <option value="" disabled selected>Seleccione un modelo</option>
+            <option value="logistica">Regresión Logística</option>
+            <option value="mlp">Red Neuronal MLP</option>
+            <option value="svm">Máquina de Vectores de Soporte (SVM)</option>
+            <option value="fcm">Modelo Difuso FCM</option>
+          </select>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary px-4">
+            <i class="bi bi-graph-up-arrow"></i> Predecir
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

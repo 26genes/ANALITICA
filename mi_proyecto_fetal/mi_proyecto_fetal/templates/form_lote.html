@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Predicción por Lotes</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #ffe6f0;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 720px;
+        margin: 5rem auto;
+        background-color: #fff0f5;
+        padding: 2rem 2.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 0.8rem 1.5rem rgba(214, 51, 108, 0.15);
+      }
+
+      h2 {
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #d81b60;
+        text-align: center;
+        font-size: 40px;
+      }
+
+      label.form-label {
+        font-weight: 600;
+        color: #a03e63;
+      }
+
+      input.form-control,
+      select.form-select {
+        border-radius: 0.5rem;
+        border: 2px solid #f8bbd0;
+        padding: 0.5rem 0.75rem;
+        background-color: #fff;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      input.form-control:focus,
+      select.form-select:focus {
+        border-color: #ec407a;
+        box-shadow: 0 0 8px rgba(236, 64, 122, 0.3);
+        outline: none;
+      }
+
+      .btn-success {
+        background-color: #ab47bc;
+        border: 2px solid #ab47bc;
+        color: #fff;
+        font-weight: 700;
+        padding: 0.6rem 1.5rem;
+        border-radius: 2rem;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+
+      .btn-success:hover {
+        background-color: #ba68c8;
+        border-color: #ba68c8;
+      }
+
+      i.bi {
+        color: #e91e63;
+        margin-right: 0.4rem;
+        vertical-align: -0.1em;
+      }
+
+      .text-center {
+        text-align: center;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2><i class="bi bi-upload"></i> Predicción por Lote</h2>
+
+      <form action="/lote" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="archivo" class="form-label">
+            <i class="bi bi-file-earmark-excel"></i> Seleccione archivo Excel
+            (.xlsx, .xls, .csv)
+          </label>
+          <input
+            class="form-control"
+            type="file"
+            id="archivo"
+            name="archivo"
+            accept=".xlsx,.xls,.csv"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="modelo" class="form-label">
+            <i class="bi bi-cpu-fill"></i> Modelo de predicción
+          </label>
+          <select id="modelo" class="form-select" name="modelo" required>
+            <option value="" disabled selected>Seleccione un modelo</option>
+            <option value="logistica">Regresión Logística</option>
+            <option value="mlp">Red Neuronal MLP</option>
+            <option value="svm">Máquina de Vectores de Soporte (SVM)</option>
+            <option value="fcm">Modelo Difuso FCM</option>
+          </select>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-success px-4">
+            <i class="bi bi-bar-chart-line"></i> Predecir Lote
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
